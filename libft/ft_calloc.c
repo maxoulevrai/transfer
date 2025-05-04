@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maleca <maleca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 19:03:08 by maleca            #+#    #+#             */
-/*   Updated: 2025/05/03 20:16:39 by maleca           ###   ########.fr       */
+/*   Created: 2025/04/25 12:43:49 by maleca            #+#    #+#             */
+/*   Updated: 2025/04/26 20:43:25 by maleca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-char	*read_and_fill(int fd, char *buff)
+void	*ft_calloc(size_t nmemb, size_t siz)
 {
-	static char	*stash;
-	char		buff[BUFFER_SIZE];
+	unsigned char	*ptr;
 
-}
-
-char *get_next_line(int fd)
-{
-
-	if (!fd || !read(fd, NULL, 0))
+	if (siz && nmemb > (UINT_MAX / siz))
 		return (NULL);
-	read_and_fill(fd, buff)
+	ptr = malloc(nmemb * siz);
+	if (!ptr)
+		return (NULL);
+	ft_bzero(ptr, nmemb * siz);
+	return (ptr);
 }

@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maleca <maleca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 19:03:08 by maleca            #+#    #+#             */
-/*   Updated: 2025/05/03 20:16:39 by maleca           ###   ########.fr       */
+/*   Created: 2025/04/24 17:48:09 by maleca            #+#    #+#             */
+/*   Updated: 2025/04/24 17:49:22 by maleca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-char	*read_and_fill(int fd, char *buff)
+int	ft_isprint(int c)
 {
-	static char	*stash;
-	char		buff[BUFFER_SIZE];
-
-}
-
-char *get_next_line(int fd)
-{
-
-	if (!fd || !read(fd, NULL, 0))
-		return (NULL);
-	read_and_fill(fd, buff)
+	if (c >= 32 && c <= 126)
+		return (1);
+	return (0);
 }

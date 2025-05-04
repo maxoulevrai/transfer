@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maleca <maleca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 19:03:08 by maleca            #+#    #+#             */
-/*   Updated: 2025/05/03 20:16:39 by maleca           ###   ########.fr       */
+/*   Created: 2025/04/29 00:21:00 by maleca            #+#    #+#             */
+/*   Updated: 2025/04/30 00:00:49 by maleca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-char	*read_and_fill(int fd, char *buff)
+t_list	*ft_lstnew(void *content)
 {
-	static char	*stash;
-	char		buff[BUFFER_SIZE];
+	t_list	*node;
 
-}
-
-char *get_next_line(int fd)
-{
-
-	if (!fd || !read(fd, NULL, 0))
+	node = malloc(sizeof(t_list));
+	if (!node)
 		return (NULL);
-	read_and_fill(fd, buff)
+	node->content = content;
+	node->next = NULL;
+	return (node);
 }
+
+// int	main(void)
+// {
+// 	t_list	*list;
+
+// 	list = ft_lstnew("");
+// 	printf("%s\n", (char *)list->content);
+// 	printf("%s\n", (char *)list->next);
+// 	free(list);
+// 	return (0);
+// }

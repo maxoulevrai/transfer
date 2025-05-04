@@ -1,28 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maleca <maleca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 19:03:08 by maleca            #+#    #+#             */
-/*   Updated: 2025/05/03 20:16:39 by maleca           ###   ########.fr       */
+/*   Created: 2025/04/24 19:14:22 by maleca            #+#    #+#             */
+/*   Updated: 2025/04/26 21:28:18 by maleca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-char	*read_and_fill(int fd, char *buff)
+char	*ft_strrchr(const char *str, int val)
 {
-	static char	*stash;
-	char		buff[BUFFER_SIZE];
+	int		i;
+	char	c;
 
+	i = ft_strlen(str);
+	c = (char)val;
+	if (c == '\0')
+		return ((char *)&str[i]);
+	i--;
+	while (i >= 0)
+	{
+		if (str[i] == c)
+			return ((char *)&str[i]);
+		i--;
+	}
+	return (NULL);
 }
 
-char *get_next_line(int fd)
-{
+// int	main(void)
+// {
+// 	char	*str = "bonjour";
 
-	if (!fd || !read(fd, NULL, 0))
-		return (NULL);
-	read_and_fill(fd, buff)
-}
+// 	printf("%s\n", ft_strrchr(str, 'b'));
+// 	return (0);
+// }

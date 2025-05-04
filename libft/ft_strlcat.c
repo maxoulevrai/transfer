@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maleca <maleca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 19:03:08 by maleca            #+#    #+#             */
-/*   Updated: 2025/05/03 20:16:39 by maleca           ###   ########.fr       */
+/*   Created: 2025/04/24 19:00:17 by maleca            #+#    #+#             */
+/*   Updated: 2025/04/27 15:23:16 by maleca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-char	*read_and_fill(int fd, char *buff)
+size_t	ft_strlcat(char *dst, const char *src, size_t siz)
 {
-	static char	*stash;
-	char		buff[BUFFER_SIZE];
+	size_t	i;
+	size_t	dst_len;
+	size_t	src_len;
 
-}
-
-char *get_next_line(int fd)
-{
-
-	if (!fd || !read(fd, NULL, 0))
-		return (NULL);
-	read_and_fill(fd, buff)
+	i = 0;
+	dst_len = ft_strlen(dst);
+	src_len = ft_strlen(src);
+	if (dst_len >= siz)
+		return (src_len + siz);
+	while (src[i] && (dst_len + i) < (siz - 1))
+	{
+		dst[dst_len + i] = src[i];
+		i++;
+	}
+	dst[dst_len + i] = '\0';
+	return (src_len + dst_len);
 }

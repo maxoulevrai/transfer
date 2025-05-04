@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maleca <maleca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 19:03:08 by maleca            #+#    #+#             */
-/*   Updated: 2025/05/03 20:16:39 by maleca           ###   ########.fr       */
+/*   Created: 2025/04/24 19:36:35 by maleca            #+#    #+#             */
+/*   Updated: 2025/04/26 21:29:47 by maleca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-char	*read_and_fill(int fd, char *buff)
+char	*ft_strnstr(const char *big, const char *little, size_t siz)
 {
-	static char	*stash;
-	char		buff[BUFFER_SIZE];
+	size_t	i;
+	size_t	j;
 
-}
-
-char *get_next_line(int fd)
-{
-
-	if (!fd || !read(fd, NULL, 0))
-		return (NULL);
-	read_and_fill(fd, buff)
+	i = 0;
+	if (!*little)
+		return ((char *)big);
+	while (big[i] && i < siz)
+	{
+		j = 0;
+		if (big[i] == little[j])
+		{
+			while (big[i + j] == little[j] && big[i + j] && (i + j) < siz)
+				j++;
+			if (little[j] == '\0')
+				return ((char *)&big[i]);
+		}
+		i++;
+	}
+	return (NULL);
 }

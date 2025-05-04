@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maleca <maleca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 19:03:08 by maleca            #+#    #+#             */
-/*   Updated: 2025/05/03 20:16:39 by maleca           ###   ########.fr       */
+/*   Created: 2025/04/24 18:21:04 by maleca            #+#    #+#             */
+/*   Updated: 2025/04/27 15:23:37 by maleca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-char	*read_and_fill(int fd, char *buff)
+size_t	ft_strlcpy(char *dst, const char *src, size_t siz)
 {
-	static char	*stash;
-	char		buff[BUFFER_SIZE];
+	size_t	i;
 
-}
-
-char *get_next_line(int fd)
-{
-
-	if (!fd || !read(fd, NULL, 0))
-		return (NULL);
-	read_and_fill(fd, buff)
+	i = 0;
+	if (siz == 0)
+		return (ft_strlen(src));
+	while (i < (siz - 1) && src[i])
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	if (siz != 0)
+		dst[i] = '\0';
+	return (ft_strlen(src));
 }

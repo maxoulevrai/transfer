@@ -1,28 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maleca <maleca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 19:03:08 by maleca            #+#    #+#             */
-/*   Updated: 2025/05/03 20:16:39 by maleca           ###   ########.fr       */
+/*   Created: 2025/04/29 03:39:02 by maleca            #+#    #+#             */
+/*   Updated: 2025/04/30 03:19:18 by maleca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-char	*read_and_fill(int fd, char *buff)
+// void	del(void *ptr)
+// {
+// 	size_t			i;
+// 	// char	*p;
+
+// 	i = 0;
+// 	// p = (char *)ptr;
+// 	while (((char *)ptr)[i])
+// 	{
+// 		((char *)ptr)[i] = '\0';
+// 		i++;
+// 	}
+// }
+
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	static char	*stash;
-	char		buff[BUFFER_SIZE];
+	t_list	*tmp;
 
-}
-
-char *get_next_line(int fd)
-{
-
-	if (!fd || !read(fd, NULL, 0))
-		return (NULL);
-	read_and_fill(fd, buff)
+	while ((*lst))
+	{
+		tmp = (*lst)->next;
+		(*del)((*lst)->content);
+		free((*lst));
+		(*lst) = tmp;
+	}
 }

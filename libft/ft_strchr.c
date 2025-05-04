@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maleca <maleca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 19:03:08 by maleca            #+#    #+#             */
-/*   Updated: 2025/05/03 20:16:39 by maleca           ###   ########.fr       */
+/*   Created: 2025/04/24 19:11:05 by maleca            #+#    #+#             */
+/*   Updated: 2025/04/30 03:21:26 by maleca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-char	*read_and_fill(int fd, char *buff)
+char	*ft_strchr(const char *str, int val)
 {
-	static char	*stash;
-	char		buff[BUFFER_SIZE];
+	size_t	i;
+	char	c;
 
-}
-
-char *get_next_line(int fd)
-{
-
-	if (!fd || !read(fd, NULL, 0))
-		return (NULL);
-	read_and_fill(fd, buff)
+	i = 0;
+	c = (char)val;
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (((char *)&str[i]));
+		i++;
+	}
+	if (c == '\0')
+		return (((char *)&str[i]));
+	return (NULL);
 }
