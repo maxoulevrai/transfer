@@ -3,74 +3,78 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra -MMD
 AR = ar rcs
 RM = rm -rf
-OBJS = ${SRCS:.c=.o}
-OBJSALL = ${SRCS:.c=.o} ${BONUS:.c=.o}
 
 SRCS = ft_isalpha.c \
-			ft_isdigit.c \
-			ft_isalnum.c \
-			ft_isascii.c \
-			ft_isprint.c \
-			ft_strlen.c \
-			ft_memset.c \
-			ft_bzero.c \
-			ft_memcpy.c \
-			ft_memmove.c \
-			ft_strlcpy.c \
-			ft_strlcat.c \
-			ft_toupper.c \
-			ft_tolower.c \
-			ft_strchr.c \
-			ft_strrchr.c \
-			ft_strncmp.c \
-			ft_memchr.c \
-			ft_memcmp.c \
-			ft_strnstr.c \
-			ft_atoi.c \
-			ft_calloc.c \
-			ft_strdup.c \
-			ft_substr.c \
-			ft_strjoin.c \
-			ft_strtrim.c \
-			ft_split.c \
-			ft_itoa.c \
-			ft_strmapi.c \
-			ft_striteri.c \
-			ft_putchar_fd.c \
-			ft_putstr_fd.c \
-			ft_putendl_fd.c \
-			ft_putnbr_fd.c
+	ft_isdigit.c \
+	ft_isalnum.c \
+	ft_isascii.c \
+	ft_isprint.c \
+	ft_strlen.c \
+	ft_memset.c \
+	ft_bzero.c \
+	ft_memcpy.c \
+	ft_memmove.c \
+	ft_strlcpy.c \
+	ft_strlcat.c \
+	ft_toupper.c \
+	ft_tolower.c \
+	ft_strchr.c \
+	ft_strrchr.c \
+	ft_strncmp.c \
+	ft_memchr.c \
+	ft_memcmp.c \
+	ft_strnstr.c \
+	ft_atoi.c \
+	ft_calloc.c \
+	ft_strdup.c \
+	ft_substr.c \
+	ft_strjoin.c \
+	ft_strtrim.c \
+	ft_split.c \
+	ft_itoa.c \
+	ft_strmapi.c \
+	ft_striteri.c \
+	ft_putchar_fd.c \
+	ft_putstr_fd.c \
+	ft_putendl_fd.c \
+	ft_putnbr_fd.c
 
 BONUS = ft_lstnew_bonus.c \
-			ft_lstadd_front_bonus.c \
-			ft_lstsize_bonus.c \
-			ft_lstlast_bonus.c \
-			ft_lstadd_back_bonus.c \
-			ft_lstdelone_bonus.c \
-			ft_lstclear_bonus.c \
-			ft_lstiter_bonus.c \
-			ft_lstmap_bonus.c \
+	ft_lstadd_front_bonus.c \
+	ft_lstsize_bonus.c \
+	ft_lstlast_bonus.c \
+	ft_lstadd_back_bonus.c \
+	ft_lstdelone_bonus.c \
+	ft_lstclear_bonus.c \
+	ft_lstiter_bonus.c \
+	ft_lstmap_bonus.c
 
+OBJS = $(SRCS:.c=.o)
+OBJS_BONUS = $(BONUS:.c=.o)
 
-all:		${NAME}
+all: $(NAME)
 
-${NAME}:	${OBJS}
-			${AR} $@ $^
+$(NAME): $(OBJS)
+	$(AR) $@ $^
 
-bonus: ${OBJSALL}
-			${AR} ${NAME} $(OBJSALL)
+bonus: $(NAME)_bonus
+
+$(NAME)_bonus: $(OBJS) $(OBJS_BONUS)
+	$(AR) $(NAME) $(OBJS) $(OBJS_BONUS)
+	@touch $@
 
 %.o: %.c
-			${CC} ${CFLAGS} -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-			${RM} ${OBJSALL} ${OBJSALL:.o=.d}
+	$(RM) $(OBJS) $(OBJS_BONUS) $(OBJS:.o=.d) $(OBJS_BONUS:.o=.d) $(NAME)_bonus
 
-fclean:	clean
-			${RM} ${NAME}
+fclean: clean
+	$(RM) $(NAME)
 
-re:		fclean all
+re: fclean all
 
 .PHONY: all clean fclean re bonus
 
--include $(OBJSALL:.o=.d)
+-include $(OBJS:.o=.d) $(OBJS_BONUS:.o=.d)
+
