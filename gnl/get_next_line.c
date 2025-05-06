@@ -6,7 +6,7 @@
 /*   By: maleca <maleca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 19:03:08 by maleca            #+#    #+#             */
-/*   Updated: 2025/05/06 10:15:17 by maleca           ###   ########.fr       */
+/*   Updated: 2025/05/06 19:12:21 by maleca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,14 +96,14 @@ char	*get_next_line(int fd)
 	return (next_line);
 }
 
-int	main(void)
-{
-	int	fd;
-	char	*line;
+// int	main(void)
+// {
+// 	int	fd;
+// 	char	*line;
 
-	fd = open("test.txt", O_RDWR);
-	line = get_next_line(fd);
-	printf("%s\n", line);
-	close(fd);
-	return (0);
-}
+// 	fd = open("test.txt", O_RDWR);
+// 	line = get_next_line(fd);
+// 	printf("%s\n", line);
+// 	close(fd);
+// 	return (0);
+// }
