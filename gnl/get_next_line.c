@@ -6,7 +6,7 @@
 /*   By: maleca <maleca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 19:03:08 by maleca            #+#    #+#             */
-/*   Updated: 2025/05/04 19:19:29 by maleca           ###   ########.fr       */
+/*   Updated: 2025/05/06 10:15:17 by maleca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	*read_and_store(int fd, char *stash)
 		if (read_bytes == -1)
 				return (free(buff), NULL);
 		buff[read_bytes] = '\0';
-		stash = ft_strjoin(stash, buff);
+		stash = ft_strjoin_gnl(stash, buff);
 		if (!stash)
 			return (free(buff), NULL);
 	}

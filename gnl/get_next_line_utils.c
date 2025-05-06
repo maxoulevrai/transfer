@@ -6,7 +6,7 @@
 /*   By: maleca <maleca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 19:12:51 by maleca            #+#    #+#             */
-/*   Updated: 2025/05/04 19:25:40 by maleca           ###   ########.fr       */
+/*   Updated: 2025/05/06 10:39:06 by maleca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,22 @@ size_t	ft_strlen_gnl(char *str)
 	while (str[i] && str[i] != '\n')
 		i++;
 	return (i);
+}
+
+void	*ft_calloc(size_t nmemb, size_t siz)
+{
+	unsigned char	*ptr;
+	size_t			i;
+
+	i = 0;
+	if (siz && nmemb > (UINT_MAX / siz))
+		return (NULL);
+	ptr = malloc(nmemb * siz);
+	if (!ptr)
+		return (NULL);
+	while (i++ < nmemb * siz)
+		ptr[i] = 0;
+	return (ptr);
 }
 
 int	ft_strchr(char *str, char c)
@@ -40,24 +56,31 @@ int	ft_strchr(char *str, char c)
 	return (0);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin_gnl(char *stash, char *buff)
 {
-	char	*dst;
-	size_t	i;
-	size_t	j;
+	char	*new_stash;
+	int	i;
+	int	j;
 
-	i = 0;
+	if (!stash)
+	{
+		stash = ft_calloc(1, sizeof(char));
+		if (!stash)
+			return (NULL);
+	}
+	i = -1;
 	j = 0;
-	dst = NULL;
-	if (!s1 && !s2)
+	new_stash = NULL;
+	if (!stash && !buff)
 		return (NULL);
-	dst = malloc(sizeof(char) * (ft_strlen_gnl(s1) + ft_strlen_gnl(s2)) + 1);
-	if (!dst)
+	new_stash = malloc(sizeof(char) * (ft_strlen_gnl(stash) + ft_strlen_gnl(buff) + 1));
+	if (!new_stash)
 		return (NULL);
-	while (s1[i++] && *s1)
-		dst[i] = s1[i];
-	while (s2[j++])
-		dst[i + j] = s2[j];
-	dst[i + j] = '\0';
-	return (dst);
+	while (stash[++i] && *stash)
+		new_stash[i] = stash[i];
+	while (buff[j++])
+		new_stash[i + j] = buff[j];
+	new_stash[i + j] = '\0';
+	free(stash);
+	return (new_stash);
 }
