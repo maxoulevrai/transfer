@@ -6,7 +6,7 @@
 /*   By: maleca <maleca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 19:12:54 by maleca            #+#    #+#             */
-/*   Updated: 2025/05/06 10:13:58 by maleca           ###   ########.fr       */
+/*   Updated: 2025/05/06 16:21:44 by maleca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@
 # include <unistd.h>
 # include <stdio.h>
 
-# define BUFFER_SIZE 5
-
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 5
+# endif
 char 	*get_next_line(int fd);
 int		ft_strchr(char *str, char c);
 void	stash_cleanup(char **stash);

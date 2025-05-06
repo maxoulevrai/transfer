@@ -6,7 +6,7 @@
 /*   By: maleca <maleca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 19:12:51 by maleca            #+#    #+#             */
-/*   Updated: 2025/05/06 10:39:06 by maleca           ###   ########.fr       */
+/*   Updated: 2025/05/06 16:21:12 by maleca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ char	*ft_strjoin_gnl(char *stash, char *buff)
 		return (NULL);
 	while (stash[++i] && *stash)
 		new_stash[i] = stash[i];
-	while (buff[j++])
-		new_stash[i + j] = buff[j];
-	new_stash[i + j] = '\0';
+	while (buff[j])
+		new_stash[i++] = buff[j++];
+	new_stash[i] = '\0';
 	free(stash);
 	return (new_stash);
 }
