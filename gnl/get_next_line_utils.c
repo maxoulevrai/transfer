@@ -6,22 +6,38 @@
 /*   By: maleca <maleca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 19:12:51 by maleca            #+#    #+#             */
-/*   Updated: 2025/05/06 16:21:12 by maleca           ###   ########.fr       */
+/*   Updated: 2025/05/12 18:28:53 by maleca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen_gnl(char *str)
+size_t	gnl_len(char *str)
 {
 	size_t	i;
 
 	if (!str)
 		return (0);
 	i = 0;
-	while (str[i] && str[i] != '\n')
+	while (str[i])
 		i++;
 	return (i);
+}
+
+char	*ft_strchr_gnl(char *str, char c)
+{
+	size_t	i;
+
+	i = 0;
+	if (!str)
+		return (NULL);
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (&str[i]);
+		i++;
+	}
+	return (NULL);
 }
 
 void	*ft_calloc(size_t nmemb, size_t siz)
@@ -35,32 +51,16 @@ void	*ft_calloc(size_t nmemb, size_t siz)
 	ptr = malloc(nmemb * siz);
 	if (!ptr)
 		return (NULL);
-	while (i++ < nmemb * siz)
-		ptr[i] = 0;
+	while (i < nmemb * siz)
+		ptr[i++] = 0;
 	return (ptr);
-}
-
-int	ft_strchr(char *str, char c)
-{
-	size_t	i;
-
-	if (!str)
-		return (0);
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == c)
-			return (1);
-		i++;
-	}
-	return (0);
 }
 
 char	*ft_strjoin_gnl(char *stash, char *buff)
 {
 	char	*new_stash;
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	if (!stash)
 	{
@@ -68,16 +68,16 @@ char	*ft_strjoin_gnl(char *stash, char *buff)
 		if (!stash)
 			return (NULL);
 	}
-	i = -1;
-	j = 0;
 	new_stash = NULL;
 	if (!stash && !buff)
 		return (NULL);
-	new_stash = malloc(sizeof(char) * (ft_strlen_gnl(stash) + ft_strlen_gnl(buff) + 1));
+	new_stash = malloc(sizeof(char) * (gnl_len(stash) + gnl_len(buff) + 1));
 	if (!new_stash)
 		return (NULL);
+	i = -1;
 	while (stash[++i] && *stash)
 		new_stash[i] = stash[i];
+	j = 0;
 	while (buff[j])
 		new_stash[i++] = buff[j++];
 	new_stash[i] = '\0';
