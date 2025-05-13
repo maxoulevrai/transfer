@@ -6,11 +6,24 @@
 /*   By: maleca <maleca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 19:03:08 by maleca            #+#    #+#             */
-/*   Updated: 2025/05/12 20:57:26 by maleca           ###   ########.fr       */
+/*   Updated: 2025/05/13 16:12:18 by maleca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+void	free_dtab(char **dtab)
+{
+	size_t	i;
+
+	i = 0;
+	while (dtab[i])
+	{
+		free(dtab[i]);
+		i++;
+	}
+	free(dtab);
+}
 
 char	*extract_line(char *stash)
 {
@@ -93,9 +106,10 @@ char	*read_and_store(int fd, char *stash, int *flag)
 
 char	*get_next_line(int fd)
 {
-	static char	*stash;
+	static char	**stash;
 	char		*next_line;
 	int			flag;
+	int			fd_index;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, NULL, 0) < 0)
 	{
@@ -106,8 +120,9 @@ char	*get_next_line(int fd)
 		}
 		return (NULL);
 	}
+	fd_index = fd - (fd - 1);
 	flag = 0;
-	stash = read_and_store(fd, stash, &flag);
+	stash = read_and_store(fd, stash[fd_index], &flag);
 	if (!stash)
 		return (free(stash), NULL);
 	next_line = extract_line(stash);
@@ -123,7 +138,7 @@ char	*get_next_line(int fd)
 // 	char	*line;
 
 // 	line = NULL;
-// 	fd = open("", O_RDWR);
+// 	fd = open("test.txt", O_RDWR);
 // 	line = get_next_line(fd);
 // 	printf("%s", line);
 // 	free(line);

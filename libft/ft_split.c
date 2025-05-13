@@ -35,8 +35,12 @@ size_t	word_count(const char *str, char c)
 			i++;
 		else if (str[i])
 		{
+			// i += word_len(&str[i], c);
+			while (str[i] != c && str[i])
+			{
+				i++;
+			}
 			count++;
-			i += word_len(&str[i], c);
 		}
 	}
 	return (count);
@@ -62,12 +66,12 @@ char	*ft_strdup_split(char *src, char c)
 	return (dst);
 }
 
-void	free_split(char **split, size_t top)
+void	free_dtab(char **split)
 {
 	size_t	i;
 
 	i = 0;
-	while (i < top)
+	while (split[i])
 	{
 		free(split[i]);
 		i++;
@@ -96,7 +100,7 @@ char	**ft_split(const char *str, char c)
 		{
 			split[j++] = ft_strdup_split((char *)&str[i], c);
 			if (!split[j - 1])
-				return (free_split(split, j), NULL);
+				return (free_dtab(split), NULL);
 			i += word_len((char *)&str[i], c);
 		}
 	}
