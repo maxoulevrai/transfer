@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: maleca <maleca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 19:36:37 by root              #+#    #+#             */
-/*   Updated: 2025/05/10 19:24:52 by root             ###   ########.fr       */
+/*   Updated: 2025/05/13 18:38:15 by maleca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ typedef struct s_stack
 	struct s_stack	*next;
 }				t_stack;
 
-int		is_valid(char *str);
+int		is_valid(char **av);
 char	**join_n_split(char **av);
-int	is_valid(char *str);
 
 #endif
