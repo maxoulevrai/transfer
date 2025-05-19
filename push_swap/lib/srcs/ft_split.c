@@ -3,46 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: maleca <maleca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 16:39:50 by maleca            #+#    #+#             */
-/*   Updated: 2025/05/09 19:43:09 by root             ###   ########.fr       */
+/*   Updated: 2025/05/19 16:34:56 by maleca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-size_t	word_len(const char *str, char c)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i] && str[i] != c)
-		i++;
-	return (i);
-}
-
-size_t	word_count(const char *str, char c)
-{
-	size_t	i;
-	size_t	count;
-
-	i = 0;
-	count = 0;
-	while (str[i])
-	{
-		if (str[i] == c)
-			i++;
-		else if (str[i])
-		{
-			count++;
-			i += word_len(&str[i], c);
-		}
-	}
-	return (count);
-}
-
-char	*ft_strdup_split(char *src, char c)
+static char	*ft_strdup_split(char *src, char c)
 {
 	size_t	i;
 	char	*dst;
@@ -60,19 +30,6 @@ char	*ft_strdup_split(char *src, char c)
 	}
 	dst[i] = '\0';
 	return (dst);
-}
-
-void	free_split(char **split, size_t top)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < top)
-	{
-		free(split[i]);
-		i++;
-	}
-	free(split);
 }
 
 char	**ft_split(const char *str, char c)
@@ -96,7 +53,7 @@ char	**ft_split(const char *str, char c)
 		{
 			split[j++] = ft_strdup_split((char *)&str[i], c);
 			if (!split[j - 1])
-				return (free_split(split, j), NULL);
+				return (free_dtab(split), NULL);
 			i += word_len((char *)&str[i], c);
 		}
 	}

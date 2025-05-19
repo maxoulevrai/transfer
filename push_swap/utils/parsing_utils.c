@@ -6,14 +6,33 @@
 /*   By: maleca <maleca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 18:04:50 by root              #+#    #+#             */
-/*   Updated: 2025/05/13 19:31:02 by maleca           ###   ########.fr       */
+/*   Updated: 2025/05/19 20:55:58 by maleca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
+static int	check_dbl(int *tab, size_t siz)
+{
+	size_t	i;
+	size_t	j;
 
-int	is_valid(char **av)
+	i = 0;
+	while (i < siz)
+	{
+		j = i + 1;
+		while (j < siz)
+		{
+			if (tab[i] == tab[j])
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
+
+static int	is_valid(char **av)
 {
 	size_t	i;
 	size_t	j;
@@ -29,7 +48,10 @@ int	is_valid(char **av)
 				if (av[i][j + 1] && !ft_isdigit(av[i][j + 1]))
 					return (0);
 			}
-			if ((!ft_isdigit(av[i][j]) && av[i][j] != 32))
+			if ((!ft_isdigit(av[i][j]) && av[i][j] != 32 
+				&& av[i][j] != '-' && av[i][j] != '+'))
+				return (0);
+			if (ft_strcmp(av[i], av[j]) == 0)
 				return (0);
 			j++;
 		}
@@ -38,29 +60,14 @@ int	is_valid(char **av)
 	return (1);
 }
 
-t_list	*init(char	**splited_args)
-{
-	t_list	stack_A;
-	size_t	i;
-
-	stack_A = ft_lstnew()
-	i = 0;
-	stack_A = (ft_atoi(splited_args[0]));
-	i = 1;
-	while (splited_args[i])
-	{
-		ft_lstadd_back(&stack_A, ft_lstnew(ft_atoi(splited_args[i]))
-		
-	}
-}
-
-char	**join_n_split(char **av)
+static char	**join_n_split(char **av)
 {
 	size_t	i;
-	t_list	*stack_A;
 	char	*tmp;
 	char	**splited_args;
+	
 
+	tmp = NULL;
 	if (!is_valid(av))
 		return (NULL);
 	i = 1;
@@ -68,36 +75,69 @@ char	**join_n_split(char **av)
 	{
 		tmp = ft_strjoin(tmp, av[i]);
 		tmp = ft_strjoin(tmp, " ");
+		if (!tmp)
+			return (NULL);
 		i++;
 	}
 	splited_args = ft_split(tmp, ' ');
-	stack_A = init(splited_args);
-	return (stack_A);
+	free(tmp);
+	if (!splited_args)
+		return (NULL);
+	return (splited_args);
 }
 
-int	*parse(char **av)
+static t_stack	*init(int	*atoied_args, size_t siz)
 {
-	char	**splited_args;
-	int		*oe = NULL;
-	size_t	i = 0;
+	t_stack	*head;
+	t_stack	*tmp;
+	t_stack	*p;
+	size_t	i;
 
+	head = NULL;
+	i = 0;
+	while (i < siz)
+	{
+		tmp = malloc(sizeof(t_stack));
+		if (!tmp && head)
+			return (NULL); // clear manquant
+		tmp->content = atoied_args[i++];
+		tmp->next = NULL;
+		if (head == NULL)
+			head = tmp;
+		else
+		{
+			p = head;
+			while (p->next != NULL)
+				p = p->next;
+			p->next = tmp;
+		}
+	}
+	return (head);
+}
+
+t_stack	*parse(char **av)
+{
+	int		*atoied_args;
+	char	**splited_args;
+	t_stack	*stack_A;
+	size_t	i;
+	size_t	dtablen;
+
+	i = 0;
 	splited_args = join_n_split(av);
 	if (!splited_args)
-		return (0);
-	while (splited_args[i])
-		printf("%s\n", splited_args[i++]);
-	return (oe);
-}
-
-
-int	main(int ac, char **av)
-{
-	int	*args;
-	
-	if (ac == 1)
-		return (ft_putendl_fd("Error", 2), 0);
-	args = parse(av);
-	return (0);
-	// if (!args)
-	// 	return (ft_putendl_fd("Error", 2), 0);
+		return (NULL);
+	dtablen = dtab_len(splited_args);
+	atoied_args = malloc(sizeof(int) * dtablen);
+	if (!atoied_args || !check_dbl(atoied_args, dtablen))
+		return (NULL);
+	i = -1;
+	while (splited_args[++i])
+		atoied_args[i] = atoi(splited_args[i]);
+	free_dtab(splited_args);
+	stack_A = init(atoied_args, dtablen);
+	if (!stack_A)
+		return (NULL); // clear manquant
+	free(atoied_args);
+	return (stack_A);
 }

@@ -11,7 +11,7 @@ SRCS = ft_printf.c \
 		${SRCDIR}ft_putcharf.c \
 		${SRCDIR}ft_putnbr_basef.c \
 		${SRCDIR}ft_putnbrf.c \
-		${SRCDIR}ft_putstrf.c \
+		utils/ft_putstrf.c \
 
 all:		${NAME}
 

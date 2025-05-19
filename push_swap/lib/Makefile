@@ -40,7 +40,10 @@ SRCS = ${SRCSDIR}ft_isalpha.c \
 			${SRCSDIR}ft_putchar_fd.c \
 			${SRCSDIR}ft_putstr_fd.c \
 			${SRCSDIR}ft_putendl_fd.c \
-			${SRCSDIR}ft_putnbr_fd.c
+			${SRCSDIR}ft_putnbr_fd.c \
+			${SRCSDIR}word_count.c \
+			${SRCSDIR}free_dtab.c \
+			${SRCSDIR}ft_strcat.c \
 
 BONUS = ${SRCSDIR}ft_lstnew_bonus.c \
 			${SRCSDIR}ft_lstadd_front_bonus.c \

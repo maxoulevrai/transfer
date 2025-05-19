@@ -6,7 +6,7 @@
 /*   By: maleca <maleca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 19:36:37 by root              #+#    #+#             */
-/*   Updated: 2025/05/13 18:38:15 by maleca           ###   ########.fr       */
+/*   Updated: 2025/05/19 20:34:35 by maleca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 
 typedef struct s_stack
 {
-	void			*content;
+	int				content;
 	struct s_stack	*next;
 }				t_stack;
 
-int		is_valid(char **av);
-char	**join_n_split(char **av);
+t_stack	*parse(char **av);
+void	stack_clear(t_stack **lst);
 
 #endif
