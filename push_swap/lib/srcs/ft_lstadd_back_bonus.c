@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: maleca <maleca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 01:47:24 by maleca            #+#    #+#             */
-/*   Updated: 2025/05/09 19:43:12 by root             ###   ########.fr       */
+/*   Created: 2025/05/20 16:39:00 by maleca            #+#    #+#             */
+/*   Updated: 2025/05/20 16:46:57 by maleca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,30 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	tmp->next = new;
 }
 
-// int	main(void)
+// int main(void)
 // {
-// 	t_list	*begin = ft_lstnew("");
-// 	t_list	*elem = ft_lstnew("larem$");
-// 	t_list	*elem2 = ft_lstnew("ipsum$");
-// 	t_list	*elem3 = ft_lstnew("dalar$");
-// 	t_list	*elem4 = ft_lstnew("sit$");
+// 	t_list		*head;
+// 	t_list		*elem;
+// 	t_list		*elem2;
+// 	t_list		*elem3;
+// 	t_list		*p;
+// 	int		chiffre = malloc(sizeof(int));
+// 	int		chiffre2 = malloc(sizeof(int));
+// 	int		chiffre3 = malloc(sizeof(int));
+// 	int		chiffre4 = malloc(sizeof(int));
 
-// 	begin = NULL;
-//     ft_lstadd_back(&begin, elem);
-//     ft_lstadd_back(&begin, elem2);
-//     ft_lstadd_back(&begin, elem3);
-//     ft_lstadd_back(&begin, elem4);
-//     while (begin)
-//     {
-//         printf("%s\n", (char *)begin->content);
-//         begin = begin->next;
-//     }
+// 	head = ft_lstnew(chiffre);
+// 	elem = ft_lstnew(chiffre2);
+// 	elem2 = ft_lstnew(chiffre3);
+// 	elem3 = ft_lstnew(chiffre4);
+// 	ft_lstadd_back(&head, elem);
+// 	ft_lstadd_back(&head, elem2);
+// 	ft_lstadd_back(&head, elem3);
+// 	p = head;
+// 	while (p)
+// 	{
+// 		printf("%s\n", (char *)p->content);
+// 		p = p->next;
+// 	}
 // 	return (0);
 // }

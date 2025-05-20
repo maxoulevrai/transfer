@@ -6,7 +6,7 @@
 /*   By: maleca <maleca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 11:22:11 by maleca            #+#    #+#             */
-/*   Updated: 2025/05/03 17:06:35 by maleca           ###   ########.fr       */
+/*   Updated: 2025/05/20 15:27:26 by maleca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,6 @@ void	ft_putnbr_basef(unsigned long long nb, char *base, size_t *count)
 	size_t	base_len;
 
 	base_len = ft_strlen(base);
-	if (nb < 0)
-	{
-		nb = -nb;
-		ft_putcharf('-', count);
-	}
 	if (nb >= base_len)
 		ft_putnbr_basef(nb / base_len, base, count);
 	ft_putcharf(base[nb % base_len], count);

@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: maleca <maleca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 12:33:52 by maleca            #+#    #+#             */
-/*   Updated: 2025/05/09 19:43:12 by root             ###   ########.fr       */
+/*   Updated: 2025/05/20 18:39:47 by maleca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
 
-int	ft_atoi(const char *nptr)
+long	ft_atoi(const char *nptr)
 {
 	size_t	i;
 	int		sign;
-	int		nbr;
+	long	nbr;
 
 	i = 0;
 	sign = 1;
@@ -35,6 +35,9 @@ int	ft_atoi(const char *nptr)
 		nbr = nbr * 10 + (nptr[i] - '0');
 		i++;
 	}
+	nbr *= sign;
+	if (nbr > INT_MAX || nbr < INT_MIN)
+		return (0);
 	return (sign * nbr);
 }
 
@@ -42,7 +45,6 @@ int	ft_atoi(const char *nptr)
 // {
 // 	// (void)ac;
 
-// 	printf("%d\n", ft_atoi(((void*)0)));
-// 	printf("%d\n", atoi(((void*)0)));
+// 	printf("%d\n", ft_atoi("2147483648"));
 // 	return (0);
 // }

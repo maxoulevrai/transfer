@@ -6,7 +6,7 @@
 /*   By: maleca <maleca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 19:36:37 by root              #+#    #+#             */
-/*   Updated: 2025/05/19 20:34:35 by maleca           ###   ########.fr       */
+/*   Updated: 2025/05/20 17:28:11 by maleca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 typedef struct s_stack
 {
 	int				content;
+	int				place_dans_LE_tablea_final;
+	int				pos;
 	struct s_stack	*next;
 }				t_stack;
 

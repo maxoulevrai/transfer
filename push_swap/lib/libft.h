@@ -6,7 +6,7 @@
 /*   By: maleca <maleca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 12:58:33 by maleca            #+#    #+#             */
-/*   Updated: 2025/05/19 20:54:23 by maleca           ###   ########.fr       */
+/*   Updated: 2025/05/20 18:45:55 by maleca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ int		ft_isascii(int c);
 int		ft_isprint(int c);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
-int		ft_atoi(const char *nptr);
 int		ft_strcmp(char *s1, char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t siz);
 int		ft_memcmp(const void *s1, const void *s2, size_t siz);
+long	ft_atoi(const char *nptr);
 void	free_dtab(char **dtab);
 void	ft_bzero(void *ptr, size_t n);
 void	ft_putchar_fd(char c, int fd);
@@ -60,7 +60,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strmapi(char const *src, char (*f)(unsigned int, char));
 char	*ft_strnstr(const char *big, const char *little, size_t siz);
 char	**ft_split(const char *str, char c);
-size_t	dtab_len(char **dtab);
+size_t	get_dtab_len(char **dtab);
 size_t	ft_strlen(const char *str);
 size_t	word_len(const char *str, char c);
 size_t	word_count(const char *str, char c);

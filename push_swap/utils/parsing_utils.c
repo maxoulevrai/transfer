@@ -6,13 +6,13 @@
 /*   By: maleca <maleca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 18:04:50 by root              #+#    #+#             */
-/*   Updated: 2025/05/19 20:55:58 by maleca           ###   ########.fr       */
+/*   Updated: 2025/05/20 16:35:52 by maleca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-static int	check_dbl(int *tab, size_t siz)
+int	check_dbl(int *tab, size_t siz)
 {
 	size_t	i;
 	size_t	j;
@@ -51,8 +51,6 @@ static int	is_valid(char **av)
 			if ((!ft_isdigit(av[i][j]) && av[i][j] != 32 
 				&& av[i][j] != '-' && av[i][j] != '+'))
 				return (0);
-			if (ft_strcmp(av[i], av[j]) == 0)
-				return (0);
 			j++;
 		}
 		i++;
@@ -86,7 +84,7 @@ static char	**join_n_split(char **av)
 	return (splited_args);
 }
 
-static t_stack	*init(int	*atoied_args, size_t siz)
+static t_stack	*init(int *atoied_args, size_t siz)
 {
 	t_stack	*head;
 	t_stack	*tmp;
@@ -127,14 +125,16 @@ t_stack	*parse(char **av)
 	splited_args = join_n_split(av);
 	if (!splited_args)
 		return (NULL);
-	dtablen = dtab_len(splited_args);
+	dtablen = get_dtab_len(splited_args);
 	atoied_args = malloc(sizeof(int) * dtablen);
-	if (!atoied_args || !check_dbl(atoied_args, dtablen))
+	if (!atoied_args)
 		return (NULL);
 	i = -1;
 	while (splited_args[++i])
 		atoied_args[i] = atoi(splited_args[i]);
 	free_dtab(splited_args);
+	if (!check_dbl(atoied_args, dtablen))
+		return (free(atoied_args), NULL);
 	stack_A = init(atoied_args, dtablen);
 	if (!stack_A)
 		return (NULL); // clear manquant
