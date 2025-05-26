@@ -1,31 +1,35 @@
 NAME = push_swap
+LIB = lib/libft.a
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -MMD
 RM = rm -rf
-SRCSDIR = srcs/
 OBJS = ${SRCS:.c=.o}
+SRCS = main.c \
+       utils/linked_list_utils.c \
+       utils/parsing_utils.c
 
-SRCS = ${SRCSDIR}ft_isalpha.c \
-			${SRCSDIR}ft_isdigit.c \
+all: ${NAME}
 
-
-
-all:		${NAME}
-
-${NAME}:	${OBJS}
-			${CC} $@ $^
+${NAME}: ${OBJS} ${LIB}
+	@echo -e "\E[32m blablablablaaaa \E[0m"
+	@echo -e "\E[32m Compiling $@ \E[0m"
+	${CC} ${CFLAGS} -o $@ $^ ${LIB}
+	@echo "Build complete"
 
 %.o: %.c
-			${CC} ${CFLAGS} -c $< -o $@
+	@echo "Compiling $<"
+	${CC} ${CFLAGS} -c $< -o $@
 
 clean:
-			${RM} ${OBJSALL} ${OBJSALL:.o=.d}
+	@echo "Cleaning object files"
+	${RM} ${OBJS} ${OBJS:.o=.d}
 
-fclean:	clean
-			${RM} ${NAME}
+fclean: clean
+	@echo "Cleaning executable"
+	${RM} ${NAME}
 
-re:		fclean all
+re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re
 
--include $(OBJSALL:.o=.d)
+-include ${OBJS:.o=.d}

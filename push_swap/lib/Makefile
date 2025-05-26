@@ -1,4 +1,4 @@
-NAME = libft.a
+LIB = libft.a
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -MMD
 AR = ar rcs
@@ -44,6 +44,10 @@ SRCS = ${SRCSDIR}ft_isalpha.c \
 			${SRCSDIR}word_count.c \
 			${SRCSDIR}free_dtab.c \
 			${SRCSDIR}ft_strcat.c \
+			${SRCSDIR}free_dtab.c \
+			${SRCSDIR}get_dtab_len.c \
+			${SRCSDIR}word_count.c \
+			${SRCSDIR}word_len.c \
 
 BONUS = ${SRCSDIR}ft_lstnew_bonus.c \
 			${SRCSDIR}ft_lstadd_front_bonus.c \
@@ -56,13 +60,13 @@ BONUS = ${SRCSDIR}ft_lstnew_bonus.c \
 			${SRCSDIR}ft_lstmap_bonus.c \
 
 
-all:		${NAME}
+all:		${LIB}
 
-${NAME}:	${OBJS}
+${LIB}:	${OBJS}
 			${AR} $@ $^
 
 bonus: ${OBJSALL}
-			${AR} ${NAME} $(OBJSALL)
+			${AR} ${LIB} $(OBJSALL)
 
 %.o: %.c
 			${CC} ${CFLAGS} -c $< -o $@
@@ -71,7 +75,7 @@ clean:
 			${RM} ${OBJSALL} ${OBJSALL:.o=.d}
 
 fclean:	clean
-			${RM} ${NAME}
+			${RM} ${LIB}
 
 re:		fclean all
 

@@ -6,29 +6,30 @@
 /*   By: maleca <maleca@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 18:04:50 by root              #+#    #+#             */
-/*   Updated: 2025/05/20 16:35:52 by maleca           ###   ########.fr       */
+/*   Updated: 2025/05/26 23:07:13 by maleca           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-int	check_dbl(int *tab, size_t siz)
+static int	check_dbl(char **splited_args)
 {
 	size_t	i;
 	size_t	j;
 
 	i = 0;
-	while (i < siz)
+	while (splited_args[i])
 	{
 		j = i + 1;
-		while (j < siz)
+		while (splited_args[j])
 		{
-			if (tab[i] == tab[j])
+			if (!strcmp(splited_args[i], splited_args[j]))
 				return (0);
 			j++;
 		}
 		i++;
 	}
+
 	return (1);
 }
 
@@ -37,11 +38,11 @@ static int	is_valid(char **av)
 	size_t	i;
 	size_t	j;
 
-	i = 1;
-	while (av[i])
+	i = -1;
+	while (av[++i])
 	{
-		j = 0;
-		while (av[i][j])
+		j = -1;
+		while (av[i][++j])
 		{
 			if (av[i][j] == '+' || av[i][j] == '-')
 			{
@@ -51,10 +52,12 @@ static int	is_valid(char **av)
 			if ((!ft_isdigit(av[i][j]) && av[i][j] != 32 
 				&& av[i][j] != '-' && av[i][j] != '+'))
 				return (0);
-			j++;
 		}
-		i++;
+		if (ft_atoi(av[i]) == 0 && *av[i] != 0)
+			return (0);
 	}
+	if (!check_dbl(&av[1]))
+		return (0);
 	return (1);
 }
 
@@ -66,12 +69,12 @@ static char	**join_n_split(char **av)
 	
 
 	tmp = NULL;
-	if (!is_valid(av))
-		return (NULL);
 	i = 1;
 	while (av[i])
 	{
 		tmp = ft_strjoin(tmp, av[i]);
+		if (!tmp)
+			return (NULL);
 		tmp = ft_strjoin(tmp, " ");
 		if (!tmp)
 			return (NULL);
@@ -84,60 +87,21 @@ static char	**join_n_split(char **av)
 	return (splited_args);
 }
 
-static t_stack	*init(int *atoied_args, size_t siz)
-{
-	t_stack	*head;
-	t_stack	*tmp;
-	t_stack	*p;
-	size_t	i;
-
-	head = NULL;
-	i = 0;
-	while (i < siz)
-	{
-		tmp = malloc(sizeof(t_stack));
-		if (!tmp && head)
-			return (NULL); // clear manquant
-		tmp->content = atoied_args[i++];
-		tmp->next = NULL;
-		if (head == NULL)
-			head = tmp;
-		else
-		{
-			p = head;
-			while (p->next != NULL)
-				p = p->next;
-			p->next = tmp;
-		}
-	}
-	return (head);
-}
-
 t_stack	*parse(char **av)
 {
-	int		*atoied_args;
 	char	**splited_args;
 	t_stack	*stack_A;
 	size_t	i;
-	size_t	dtablen;
 
+	if (!is_valid(&av[1]))
+		return (NULL);
 	i = 0;
 	splited_args = join_n_split(av);
 	if (!splited_args)
 		return (NULL);
-	dtablen = get_dtab_len(splited_args);
-	atoied_args = malloc(sizeof(int) * dtablen);
-	if (!atoied_args)
-		return (NULL);
-	i = -1;
-	while (splited_args[++i])
-		atoied_args[i] = atoi(splited_args[i]);
-	free_dtab(splited_args);
-	if (!check_dbl(atoied_args, dtablen))
-		return (free(atoied_args), NULL);
-	stack_A = init(atoied_args, dtablen);
+	stack_A = init(splited_args);
 	if (!stack_A)
-		return (NULL); // clear manquant
-	free(atoied_args);
+		return (NULL);
+	free_dtab(splited_args);
 	return (stack_A);
 }
