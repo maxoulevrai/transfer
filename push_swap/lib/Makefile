@@ -3,82 +3,80 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra -MMD
 AR = ar rcs
 RM = rm -rf
-SRCSDIR = srcs/
-OBJS = ${SRCS:.c=.o}
-OBJSALL = ${SRCS:.c=.o} ${BONUS:.c=.o}
+LIB_DIR = srcs/
+LIB_OBJS = ${LIB_SRCS:.c=.o}
 
-SRCS = ${SRCSDIR}ft_isalpha.c \
-			${SRCSDIR}ft_isdigit.c \
-			${SRCSDIR}ft_isalnum.c \
-			${SRCSDIR}ft_isascii.c \
-			${SRCSDIR}ft_isprint.c \
-			${SRCSDIR}ft_strlen.c \
-			${SRCSDIR}ft_memset.c \
-			${SRCSDIR}ft_bzero.c \
-			${SRCSDIR}ft_memcpy.c \
-			${SRCSDIR}ft_memmove.c \
-			${SRCSDIR}ft_strlcpy.c \
-			${SRCSDIR}ft_strlcat.c \
-			${SRCSDIR}ft_toupper.c \
-			${SRCSDIR}ft_tolower.c \
-			${SRCSDIR}ft_strchr.c \
-			${SRCSDIR}ft_strrchr.c \
-			${SRCSDIR}ft_strncmp.c \
-			${SRCSDIR}ft_memchr.c \
-			${SRCSDIR}ft_memcmp.c \
-			${SRCSDIR}ft_strnstr.c \
-			${SRCSDIR}ft_atoi.c \
-			${SRCSDIR}ft_calloc.c \
-			${SRCSDIR}ft_strdup.c \
-			${SRCSDIR}ft_substr.c \
-			${SRCSDIR}ft_strjoin.c \
-			${SRCSDIR}ft_strtrim.c \
-			${SRCSDIR}ft_split.c \
-			${SRCSDIR}ft_itoa.c \
-			${SRCSDIR}ft_strmapi.c \
-			${SRCSDIR}ft_striteri.c \
-			${SRCSDIR}ft_putchar_fd.c \
-			${SRCSDIR}ft_putstr_fd.c \
-			${SRCSDIR}ft_putendl_fd.c \
-			${SRCSDIR}ft_putnbr_fd.c \
-			${SRCSDIR}word_count.c \
-			${SRCSDIR}free_dtab.c \
-			${SRCSDIR}ft_strcat.c \
-			${SRCSDIR}free_dtab.c \
-			${SRCSDIR}get_dtab_len.c \
-			${SRCSDIR}word_count.c \
-			${SRCSDIR}word_len.c \
-
-BONUS = ${SRCSDIR}ft_lstnew_bonus.c \
-			${SRCSDIR}ft_lstadd_front_bonus.c \
-			${SRCSDIR}ft_lstsize_bonus.c \
-			${SRCSDIR}ft_lstlast_bonus.c \
-			${SRCSDIR}ft_lstadd_back_bonus.c \
-			${SRCSDIR}ft_lstdelone_bonus.c \
-			${SRCSDIR}ft_lstclear_bonus.c \
-			${SRCSDIR}ft_lstiter_bonus.c \
-			${SRCSDIR}ft_lstmap_bonus.c \
+LIB_SRCS = ${LIB_DIR}ft_isalpha.c \
+			${LIB_DIR}ft_isdigit.c \
+			${LIB_DIR}ft_isalnum.c \
+			${LIB_DIR}ft_isascii.c \
+			${LIB_DIR}ft_isprint.c \
+			${LIB_DIR}ft_strlen.c \
+			${LIB_DIR}ft_memset.c \
+			${LIB_DIR}ft_bzero.c \
+			${LIB_DIR}ft_memcpy.c \
+			${LIB_DIR}ft_memmove.c \
+			${LIB_DIR}ft_strlcpy.c \
+			${LIB_DIR}ft_strlcat.c \
+			${LIB_DIR}ft_toupper.c \
+			${LIB_DIR}ft_tolower.c \
+			${LIB_DIR}ft_strchr.c \
+			${LIB_DIR}ft_strrchr.c \
+			${LIB_DIR}ft_strncmp.c \
+			${LIB_DIR}ft_memchr.c \
+			${LIB_DIR}ft_memcmp.c \
+			${LIB_DIR}ft_strnstr.c \
+			${LIB_DIR}ft_atoi.c \
+			${LIB_DIR}ft_calloc.c \
+			${LIB_DIR}ft_strdup.c \
+			${LIB_DIR}ft_substr.c \
+			${LIB_DIR}ft_strjoin.c \
+			${LIB_DIR}ft_strtrim.c \
+			${LIB_DIR}ft_split.c \
+			${LIB_DIR}ft_itoa.c \
+			${LIB_DIR}ft_strmapi.c \
+			${LIB_DIR}ft_striteri.c \
+			${LIB_DIR}ft_putchar_fd.c \
+			${LIB_DIR}ft_putstr_fd.c \
+			${LIB_DIR}ft_putendl_fd.c \
+			${LIB_DIR}ft_putnbr_fd.c \
+			${LIB_DIR}word_count.c \
+			${LIB_DIR}free_dtab.c \
+			${LIB_DIR}ft_strcat.c \
+			${LIB_DIR}get_dtab_len.c \
+			${LIB_DIR}word_len.c \
+			${LIB_DIR}ft_lstnew.c \
+			${LIB_DIR}ft_lstadd_front.c \
+			${LIB_DIR}ft_lstsize.c \
+			${LIB_DIR}ft_lstlast.c \
+			${LIB_DIR}ft_lstadd_back.c \
+			${LIB_DIR}ft_lstdelone.c \
+			${LIB_DIR}ft_lstclear.c \
+			${LIB_DIR}ft_lstiter.c \
+			${LIB_DIR}ft_lstmap.c \
 
 
-all:		${LIB}
+lib:		${LIB}
 
-${LIB}:	${OBJS}
-			${AR} $@ $^
-
-bonus: ${OBJSALL}
-			${AR} ${LIB} $(OBJSALL)
+${LIB}:	${LIB_OBJS}
+	@echo -e "Compiling $@"
+	${AR} $@ $^
+	@echo "Archive complete"
 
 %.o: %.c
-			${CC} ${CFLAGS} -c $< -o $@
+	@echo "Compiling $<"
+	${CC} ${CFLAGS} -c $< -o $@
 
-clean:
-			${RM} ${OBJSALL} ${OBJSALL:.o=.d}
+lib_clean:
+	@echo "Cleaning library object files"
+	${RM} ${LIB_OBJS} $(LIB_OBJS:.o=.d)
 
-fclean:	clean
-			${RM} ${LIB}
+lib_fclean:	lib_clean
+	@echo "Cleaning library"
+	${RM} ${LIB}
 
-re:		fclean all
+re_lib:		fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: lib lib_clean lib_fclean re_lib
 
--include $(OBJSALL:.o=.d)
+-include $(LIB_OBJS:.o=.d)
